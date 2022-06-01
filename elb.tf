@@ -18,6 +18,12 @@ resource "aws_lb_target_group_attachment" "instance_first" {
   port             = 80
 }
 
+resource "aws_lb_target_group_attachment" "instance_second" {
+  target_group_arn = aws_lb_target_group.main.arn
+  target_id        = aws_instance.second.id
+  port             = 80
+}
+
 resource "aws_lb" "main" {
   name               = "elb-${local.name}"
   internal           = false
