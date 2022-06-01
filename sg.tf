@@ -26,4 +26,8 @@ resource "aws_security_group" "web" {
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Name = "web-${local.name}"
+  }
 }
