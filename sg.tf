@@ -31,3 +31,27 @@ resource "aws_security_group" "web" {
     Name = "web-${local.name}"
   }
 }
+
+resource "aws_security_group" "db" {
+  name        = "db-${local.name}"
+  description = "db-${local.name}"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    from_port       = 3306
+    protocol        = "tcp"
+    to_port         = 3306
+    security_groups = [aws_security_group.web.id]
+  }
+
+  egress {
+    from_port   = 0
+    protocol    = "-1"
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "db-${local.name}"
+  }
+}
