@@ -4,9 +4,9 @@ resource "aws_security_group" "web" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port   = 20
+    from_port   = 22
     protocol    = "tcp"
-    to_port     = 20
+    to_port     = 22
     cidr_blocks = ["3.112.23.0/29"]
   }
 
