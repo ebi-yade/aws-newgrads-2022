@@ -8,7 +8,12 @@ resource "aws_db_subnet_group" "main" {
   ]
 }
 
-resource "aws_db_instance" "first" {
+moved {
+  from = aws_db_instance.first
+  to   = aws_db_instance.main
+}
+
+resource "aws_db_instance" "main" {
   identifier     = "db-${local.name}"
   engine         = "mysql"
   engine_version = "8.0.20"
@@ -31,4 +36,7 @@ resource "aws_db_instance" "first" {
 
   storage_encrypted   = false
   skip_final_snapshot = true
+
+  multi_az = true
+  apply_immediately = true
 }
